@@ -13,6 +13,10 @@ public class Cliente {
     private String nome;
     private String telefone;
 
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereço endereço;
+
     @OneToMany(mappedBy = "cliente")
     private List<Viagem> viagens;
 
@@ -20,4 +24,36 @@ public class Cliente {
         this.id = id;}
     public int getId() {
         return id;}
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public Endereço getEndereço() {
+        return endereço;
+    }
+
+    public void setEndereço(Endereço endereço) {
+        this.endereço = endereço;
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
+    }
 }
