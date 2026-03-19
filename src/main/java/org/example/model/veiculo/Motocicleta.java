@@ -1,10 +1,10 @@
-package org.example.model;
+package org.example.model.veiculo;
 
 import jakarta.persistence.*;
 import org.example.model.Veiculo;
 
 @Entity
-public class Motocicleta extends Veiculo{
+public class Motocicleta extends Veiculo {
 
     private int cilindradas;
 
