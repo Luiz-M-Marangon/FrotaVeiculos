@@ -1,13 +1,5 @@
 package org.example;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import org.example.model.Cliente;
-import org.example.model.Endereço;
-
-import java.util.Scanner;
-
 
 public class Main {
     static void main(String[] args) {

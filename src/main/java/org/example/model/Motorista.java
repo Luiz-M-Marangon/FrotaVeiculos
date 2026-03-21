@@ -16,7 +16,7 @@ public class Motorista {
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
-    private Endereço endereço;
+    private Endereco endereco;
 
     @OneToMany(mappedBy = "motorista")
     private List<Viagem> viagens;
@@ -37,10 +37,10 @@ public class Motorista {
         return cnh;}
     public void setCnh(String cnh) {
         this.cnh = cnh;}
-    public Endereço getEndereço() {
-        return endereço;}
-    public void setEndereço(Endereço endereço) {
-        this.endereço = endereço;}
+    public Endereco getEndereço() {
+        return endereco;}
+    public void setEndereço(Endereco endereco) {
+        this.endereco = endereco;}
     public List<Viagem> getViagens() {
         return viagens;}
     public void setViagens(List<Viagem> viagens) {
