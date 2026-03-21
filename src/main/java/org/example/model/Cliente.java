@@ -1,48 +1,59 @@
-package org.example.bd;
+package org.example.model;
 
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class Motorista {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String nome;
-    private String cpf;
-    private String cnh;
+    private String telefone;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereço endereço;
 
-    @OneToMany(mappedBy = "motorista")
+    @OneToMany(mappedBy = "cliente")
     private List<Viagem> viagens;
 
-    public int getId() {
-        return id;}
     public void setId(int id) {
         this.id = id;}
+    public int getId() {
+        return id;}
+
     public String getNome() {
-        return nome;}
+        return nome;
+    }
+
     public void setNome(String nome) {
-        this.nome = nome;}
-    public String getCpf() {
-        return cpf;}
-    public void setCpf(String cpf) {
-        this.cpf = cpf;}
-    public String getCnh() {
-        return cnh;}
-    public void setCnh(String cnh) {
-        this.cnh = cnh;}
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public Endereço getEndereço() {
-        return endereço;}
+        return endereço;
+    }
+
     public void setEndereço(Endereço endereço) {
-        this.endereço = endereço;}
+        this.endereço = endereço;
+    }
+
     public List<Viagem> getViagens() {
-        return viagens;}
+        return viagens;
+    }
+
     public void setViagens(List<Viagem> viagens) {
-        this.viagens = viagens;}
+        this.viagens = viagens;
+    }
 }

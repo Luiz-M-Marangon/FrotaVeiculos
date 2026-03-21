@@ -1,7 +1,6 @@
-package org.example.bd;
+package org.example.model;
 
 import jakarta.persistence.*;
-import org.example.model.Veiculo;
 
 import java.time.LocalDateTime;
 

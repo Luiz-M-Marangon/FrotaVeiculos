@@ -1,11 +1,10 @@
 package org.example;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.example.bd.Cliente;
-import org.example.bd.Endereço;
+import org.example.model.Cliente;
+import org.example.model.Endereço;
 
 import java.util.Scanner;
 

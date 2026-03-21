@@ -1,4 +1,4 @@
-package org.example.model.veiculo;
+package org.example.model.tipoveiculo;
 
 import jakarta.persistence.*;
 import org.example.model.Veiculo;
