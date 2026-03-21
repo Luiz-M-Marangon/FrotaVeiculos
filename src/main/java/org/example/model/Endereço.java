@@ -2,6 +2,8 @@ package org.example.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Endereço {
     @Id
@@ -12,6 +14,9 @@ public class Endereço {
     private String cidade;
     private String estado;
     private String cep;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Cliente> enderecos;
 
     public int getId() {
         return id;}
@@ -33,4 +38,8 @@ public class Endereço {
         return cep;}
     public void setCep(String cep) {
         this.cep = cep;}
+    public List<Cliente> getEnderecos() {
+        return enderecos;}
+    public void setEnderecos(List<Cliente> enderecos) {
+        this.enderecos = enderecos;}
 }
