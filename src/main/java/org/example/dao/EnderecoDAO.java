@@ -52,7 +52,7 @@ public class EnderecoDAO {
 
         Endereço e = em.find(Endereço.class, id);
         if (e != null){
-            em.refresh(e);
+            em.remove(e);
         }
 
         em.getTransaction().commit();

@@ -53,15 +53,15 @@ public class ViagemDAO {
 
         Viagem v = em.find(Viagem.class, id);
         if (v != null){
-            em.refresh(v);
+            em.remove(v);
         }
 
         em.getTransaction().commit();
         em.close();
     }
 
-    // UTILIZADO NO RELATÓRIO DE VIAGENS POR MOTORISTA
 
+    // UTILIZADO NO RELATÓRIO DE VIAGENS POR MOTORISTA
     public List<Viagem> listarPorMotorista(int motoristaId){
         EntityManager em = JPAUtil.getEntityManager();
 

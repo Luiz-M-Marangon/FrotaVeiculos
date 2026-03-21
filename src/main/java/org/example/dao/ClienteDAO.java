@@ -52,7 +52,7 @@ public class ClienteDAO {
 
         Cliente c = em.find(Cliente.class, id);
         if (c != null){
-            em.refresh(c);
+            em.remove(c);
         }
 
         em.getTransaction().commit();

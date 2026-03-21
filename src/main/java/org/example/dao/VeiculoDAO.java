@@ -52,7 +52,7 @@ public class VeiculoDAO {
 
         Veiculo v = em.find(Veiculo.class, id);
         if (v != null){
-            em.refresh(v);
+            em.remove(v);
         }
 
         em.getTransaction().commit();
