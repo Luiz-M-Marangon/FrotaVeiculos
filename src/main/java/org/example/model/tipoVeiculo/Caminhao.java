@@ -7,6 +7,7 @@ import org.example.model.Veiculo;
 public class Caminhao extends Veiculo {
 
     public int eixos;
+    public String txto;
 
     public Caminhao(){}
 
