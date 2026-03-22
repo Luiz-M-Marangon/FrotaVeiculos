@@ -15,9 +15,9 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+//    @ManyToOne
+//    @JoinColumn(name = "cliente_id")
+//    private Cliente cliente;
 
     public int getId() {
         return id;}
@@ -40,8 +40,8 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;}
 
-    public Cliente getCliente() {
-        return cliente;}
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;}
+//    public Cliente getCliente() {
+//        return cliente;}
+//    public void setCliente(Cliente cliente) {
+//        this.cliente = cliente;}
 }

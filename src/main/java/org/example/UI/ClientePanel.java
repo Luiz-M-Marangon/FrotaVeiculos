@@ -16,28 +16,110 @@ public class ClientePanel extends JPanel {
     private Endereco enderecoSelecionado;
 
     private JTable tabela;
+    private DefaultTableModel model;
 
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public ClientePanel() {
 
+//        setLayout(new BorderLayout());
+//
+//        // FORM
+//        JPanel form = new JPanel(new GridLayout(3, 2));
+//
+//        form.add(new JLabel("Nome:"));
+//        nomeField = new JTextField();
+//        form.add(nomeField);
+//
+//        form.add(new JLabel("Nome:"));
+//        telefoneField = new JTextField();
+//        form.add(telefoneField);
+//
+//        form.add(new JLabel("Endereço:"));
+//
+//        JPanel enderecoPanel = new JPanel(new BorderLayout());
+//        enderecoLabel = new JLabel("Nenhum selecionado");
+//
+//        JButton selecionarBtn = new JButton("Selecionar");
+//        selecionarBtn.addActionListener(e -> abrirSelecao());
+//
+//        enderecoPanel.add(enderecoLabel, BorderLayout.CENTER);
+//        enderecoPanel.add(selecionarBtn, BorderLayout.EAST);
+//
+//        form.add(enderecoPanel);
+//
+//        JButton salvarBtn = new JButton("Salvar");
+//        JButton atualizarBtn = new JButton("Atualizar");
+//        JButton deletarBtn = new JButton("Deletar");
+//
+//        form.add(salvarBtn);
+//        form.add(atualizarBtn);
+//
+//        add(form, BorderLayout.NORTH);
+//
+//        // TABELA
+//        tabela = new JTable();
+//        atualizarTabela();
+//        add(new JScrollPane(tabela), BorderLayout.CENTER);
+//
+//        JPanel south = new JPanel();
+//        south.add(deletarBtn);
+//        add(south, BorderLayout.SOUTH);
+//
+//        // AÇÕES
+//        salvarBtn.addActionListener(e -> salvar());
+//        atualizarBtn.addActionListener(e -> atualizar());
+//        deletarBtn.addActionListener(e -> deletar());
         setLayout(new BorderLayout());
 
-        // FORM
-        JPanel form = new JPanel(new GridLayout(3, 2));
+        // ================= FORM =================
+        JPanel form = new JPanel();
+        form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
-        form.add(new JLabel("Nome:"));
         nomeField = new JTextField();
-        form.add(nomeField);
-
-        form.add(new JLabel("Nome:"));
         telefoneField = new JTextField();
-        form.add(telefoneField);
+        enderecoLabel = new JLabel("Nenhum selecionado");
 
-        form.add(new JLabel("Endereço:"));
+        form.add(criarLinha("Nome:", nomeField));
+        form.add(criarLinha("Telefone:", telefoneField));
+        form.add(criarLinhaEndereco());
+        form.add(criarBotoes());
+
+        add(form, BorderLayout.NORTH);
+
+        // ================= TABELA =================
+        model = new DefaultTableModel(
+                new Object[]{"ID", "Nome", "Telefone", "Endereço"}, 0
+        );
+
+        tabela = new JTable(model);
+
+        tabela.getSelectionModel().addListSelectionListener(e -> preencherCampos());
+
+        add(new JScrollPane(tabela), BorderLayout.CENTER);
+
+        atualizarTabela();
+    }
+
+    // ================= UI HELPERS =================
+
+    private JPanel criarLinha(String label, JTextField field) {
+        JPanel p = new JPanel(new BorderLayout(5, 5));
+        p.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        p.add(new JLabel(label), BorderLayout.WEST);
+        p.add(field, BorderLayout.CENTER);
+
+        return p;
+    }
+
+    private JPanel criarLinhaEndereco() {
+        JPanel p = new JPanel(new BorderLayout(5, 5));
+        p.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        p.add(new JLabel("Endereço:"), BorderLayout.WEST);
 
         JPanel enderecoPanel = new JPanel(new BorderLayout());
-        enderecoLabel = new JLabel("Nenhum selecionado");
 
         JButton selecionarBtn = new JButton("Selecionar");
         selecionarBtn.addActionListener(e -> abrirSelecao());
@@ -45,35 +127,30 @@ public class ClientePanel extends JPanel {
         enderecoPanel.add(enderecoLabel, BorderLayout.CENTER);
         enderecoPanel.add(selecionarBtn, BorderLayout.EAST);
 
-        form.add(enderecoPanel);
+        p.add(enderecoPanel, BorderLayout.CENTER);
+
+        return p;
+    }
+    private JPanel criarBotoes() {
+        JPanel p = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JButton salvarBtn = new JButton("Salvar");
         JButton atualizarBtn = new JButton("Atualizar");
         JButton deletarBtn = new JButton("Deletar");
 
-        form.add(salvarBtn);
-        form.add(atualizarBtn);
-
-        add(form, BorderLayout.NORTH);
-
-        // TABELA
-        tabela = new JTable();
-        atualizarTabela();
-        add(new JScrollPane(tabela), BorderLayout.CENTER);
-
-        JPanel south = new JPanel();
-        south.add(deletarBtn);
-        add(south, BorderLayout.SOUTH);
-
-        // AÇÕES
         salvarBtn.addActionListener(e -> salvar());
         atualizarBtn.addActionListener(e -> atualizar());
         deletarBtn.addActionListener(e -> deletar());
-    }
+
+        p.add(salvarBtn);
+        p.add(atualizarBtn);
+        p.add(deletarBtn);
+
+        return p;
+        }
 
     private void abrirSelecao() {
-        SelecionarEndereco dialog =
-                new SelecionarEndereco((Frame) SwingUtilities.getWindowAncestor(this));
+        SelecionarEndereco dialog = new SelecionarEndereco((Frame) SwingUtilities.getWindowAncestor(this));
 
         dialog.setVisible(true);
 
@@ -88,10 +165,15 @@ public class ClientePanel extends JPanel {
     }
 
     private void salvar() {
+        if (enderecoSelecionado == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um endereço!");
+            return;
+        }
+
         Cliente c = new Cliente();
         c.setNome(nomeField.getText());
         c.setTelefone(telefoneField.getText());
-        c.setEndereco((List<Endereco>) enderecoSelecionado);
+        c.setEndereco(enderecoSelecionado);
 
         clienteDAO.salvar(c);
         atualizarTabela();
@@ -101,12 +183,19 @@ public class ClientePanel extends JPanel {
         int linha = tabela.getSelectedRow();
 
         if (linha >= 0) {
+
+            if (enderecoSelecionado == null) {
+                JOptionPane.showMessageDialog(this, "Selecione um endereço!");
+                return;
+            }
+
+
             int id = (int) tabela.getValueAt(linha, 0);
 
             Cliente c = clienteDAO.consultar(id);
             c.setNome(nomeField.getText());
             c.setTelefone(telefoneField.getText());
-            c.setEndereco((List<Endereco>) enderecoSelecionado);
+            c.setEndereco(enderecoSelecionado);
 
             clienteDAO.atualizar(c);
             atualizarTabela();
@@ -138,5 +227,14 @@ public class ClientePanel extends JPanel {
         }
 
         tabela.setModel(new DefaultTableModel(dados, col));
+    }
+
+    private void preencherCampos() {
+        int linha = tabela.getSelectedRow();
+
+        if (linha >= 0) {
+            nomeField.setText(tabela.getValueAt(linha, 1).toString());
+            telefoneField.setText(tabela.getValueAt(linha, 2).toString());
+        }
     }
 }

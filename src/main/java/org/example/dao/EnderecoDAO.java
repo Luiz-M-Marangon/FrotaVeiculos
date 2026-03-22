@@ -30,7 +30,7 @@ public class EnderecoDAO {
 
     public List<Endereco> listar(){
         EntityManager em = JPAUtil.getEntityManager();
-        List<Endereco> lista = em.createQuery("FROM Endereço", Endereco.class).getResultList();
+        List<Endereco> lista = em.createQuery("FROM Endereco", Endereco.class).getResultList();
 
         em.close();
         return lista;
