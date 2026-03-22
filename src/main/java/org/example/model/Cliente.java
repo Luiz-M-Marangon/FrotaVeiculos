@@ -13,9 +13,8 @@ public class Cliente {
     private String nome;
     private String telefone;
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_id")
-    private Endereco endereco;
+    @OneToMany(mappedBy = "cliente")
+    private List<Viagem> endereco;
 
     @OneToMany(mappedBy = "cliente")
     private List<Viagem> viagens;
@@ -41,11 +40,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Endereco getEndereco() {
+    public List<Viagem> getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(List<Viagem> endereco) {
         this.endereco = endereco;
     }
 

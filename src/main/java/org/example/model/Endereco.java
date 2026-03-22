@@ -15,8 +15,9 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Cliente> enderecos;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public int getId() {
         return id;}
@@ -38,8 +39,9 @@ public class Endereco {
         return cep;}
     public void setCep(String cep) {
         this.cep = cep;}
-    public List<Cliente> getEnderecos() {
-        return enderecos;}
-    public void setEnderecos(List<Cliente> enderecos) {
-        this.enderecos = enderecos;}
+
+    public Cliente getCliente() {
+        return cliente;}
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;}
 }
