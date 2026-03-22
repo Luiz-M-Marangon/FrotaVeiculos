@@ -1,10 +1,14 @@
 package org.example;
 
+import org.example.UI.SelecionarEndereco;
 import org.example.UI.Tela;
 
-public class Principal {
+import javax.swing.*;
+import java.awt.*;
 
-    public static void main(String[] args) {
+public class Principal extends Component {
+
+    public void main(String[] args) {
         new Tela();
     }
 }

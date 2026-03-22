@@ -11,6 +11,7 @@ import java.awt.*;
 
 public class ClientePanel extends JPanel {
     private JTextField nomeField;
+    private JTextField telefoneField;
     private JLabel enderecoLabel;
     private Endereco enderecoSelecionado;
 
@@ -28,6 +29,10 @@ public class ClientePanel extends JPanel {
         form.add(new JLabel("Nome:"));
         nomeField = new JTextField();
         form.add(nomeField);
+
+        form.add(new JLabel("Nome:"));
+        telefoneField = new JTextField();
+        form.add(telefoneField);
 
         form.add(new JLabel("Endereço:"));
 
@@ -85,7 +90,8 @@ public class ClientePanel extends JPanel {
     private void salvar() {
         Cliente c = new Cliente();
         c.setNome(nomeField.getText());
-        c.setEndereco(enderecoSelecionado);
+        c.setTelefone(telefoneField.getText());
+        c.setEndereco((List<Endereco>) enderecoSelecionado);
 
         clienteDAO.salvar(c);
         atualizarTabela();
@@ -99,7 +105,8 @@ public class ClientePanel extends JPanel {
 
             Cliente c = clienteDAO.consultar(id);
             c.setNome(nomeField.getText());
-            c.setEndereco(enderecoSelecionado);
+            c.setTelefone(telefoneField.getText());
+            c.setEndereco((List<Endereco>) enderecoSelecionado);
 
             clienteDAO.atualizar(c);
             atualizarTabela();
@@ -119,14 +126,15 @@ public class ClientePanel extends JPanel {
     private void atualizarTabela() {
         List<Cliente> lista = clienteDAO.listar();
 
-        String[] col = {"ID", "Nome", "Endereço"};
-        Object[][] dados = new Object[lista.size()][3];
+        String[] col = {"ID", "Nome", "Telefone", "Endereço"};
+        Object[][] dados = new Object[lista.size()][4];
 
         for (int i = 0; i < lista.size(); i++) {
             Cliente c = lista.get(i);
             dados[i][0] = c.getId();
             dados[i][1] = c.getNome();
-            dados[i][2] = c.getEndereco();
+            dados[i][2] = c.getTelefone();
+            dados[i][3] = c.getEndereco();
         }
 
         tabela.setModel(new DefaultTableModel(dados, col));

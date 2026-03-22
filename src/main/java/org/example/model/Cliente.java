@@ -14,7 +14,7 @@ public class Cliente {
     private String telefone;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Viagem> endereco;
+    private List<Endereco> endereco;
 
     @OneToMany(mappedBy = "cliente")
     private List<Viagem> viagens;
@@ -40,11 +40,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public List<Viagem> getEndereco() {
+    public List<Endereco> getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(List<Viagem> endereco) {
+    public void setEndereco(List<Endereco> endereco) {
         this.endereco = endereco;
     }
 
