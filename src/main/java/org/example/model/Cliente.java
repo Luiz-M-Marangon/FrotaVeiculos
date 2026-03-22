@@ -60,4 +60,6 @@ public class Cliente {
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;
     }
+
+
 }
