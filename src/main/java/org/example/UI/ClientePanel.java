@@ -1,5 +1,6 @@
 package org.example.UI;
 
+import org.example.UI.selects.SelecionarEndereco;
 import org.example.dao.ClienteDAO;
 import org.example.model.Cliente;
 import org.example.model.Endereco;
@@ -93,6 +94,14 @@ public class ClientePanel extends JPanel {
         );
 
         tabela = new JTable(model);
+
+        //nao permitir edição na tebela principal do crud
+        tabela.setRowSelectionAllowed(true);
+        tabela.setColumnSelectionAllowed(false);
+        tabela.setCellSelectionEnabled(false);
+        tabela.setRowSelectionAllowed(true);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.setDefaultEditor(Object.class, null); // 🔥 trava edição
 
         tabela.getSelectionModel().addListSelectionListener(e -> preencherCampos());
 
@@ -205,11 +214,19 @@ public class ClientePanel extends JPanel {
     private void deletar() {
         int linha = tabela.getSelectedRow();
 
-        if (linha >= 0) {
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            return;
+        }else {
             int id = (int) tabela.getValueAt(linha, 0);
             clienteDAO.deletar(id);
             atualizarTabela();
         }
+//        if (linha > 0) {
+//            int id = (int) tabela.getValueAt(linha, 0);
+//            clienteDAO.deletar(id);
+//            atualizarTabela();
+//        }
     }
 
     private void atualizarTabela() {

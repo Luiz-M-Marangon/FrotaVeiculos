@@ -61,5 +61,7 @@ public class Cliente {
         this.viagens = viagens;
     }
 
-
+    @Override
+    public String toString() {
+        return nome;}
 }

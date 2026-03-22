@@ -11,9 +11,17 @@ public class Viagem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String origem;
-    private String destino;
+//    private String origem;
+//    private String destino;
     private LocalDateTime dataViagem;
+
+    @ManyToOne
+    @JoinColumn(name = "origem_id")
+    private Endereco origem;
+
+    @ManyToOne
+    @JoinColumn(name = "destino_id")
+    private Endereco destino;
 
     @ManyToOne
     @JoinColumn(name = "motorista_id")
@@ -32,15 +40,14 @@ public class Viagem {
         return id;}
     public void setId(int id) {
         this.id = id;}
-    public String getOrigem() {
-        return origem;}
-
-    public void setOrigem(String origem) {
-        this.origem = origem;}
-    public String getDestino() {
-        return destino;}
-    public void setDestino(String destino) {
-        this.destino = destino;}
+//    public String getOrigem() {
+//        return origem;}
+//    public void setOrigem(String origem) {
+//        this.origem = origem;}
+//    public String getDestino() {
+//        return destino;}
+//    public void setDestino(String destino) {
+//        this.destino = destino;}
     public LocalDateTime getDataViagem() {
         return dataViagem;}
     public void setDataViagem(LocalDateTime dataViagem) {
@@ -57,4 +64,13 @@ public class Viagem {
         return cliente;}
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;}
+    public Endereco getDestino() {
+        return destino;}
+    public void setDestino(Endereco destino) {
+        this.destino = destino;}
+    public Endereco getOrigem() {
+        return origem;}
+    public void setOrigem(Endereco origem) {
+        this.origem = origem;
+    }
 }

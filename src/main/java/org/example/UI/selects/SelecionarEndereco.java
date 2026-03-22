@@ -1,4 +1,4 @@
-package org.example.UI;
+package org.example.UI.selects;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +21,21 @@ public class SelecionarEndereco extends JDialog {
 
         tabela = new JTable();
         carregarTabela();
+
+        tabela.setRowSelectionAllowed(true);
+        tabela.setColumnSelectionAllowed(false);
+        tabela.setCellSelectionEnabled(false);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.setDefaultEditor(Object.class, null);
+
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2 && tabela.getSelectedRow() != -1) {
+                    selecionar();
+                }
+            }
+        });
 
         JButton selecionarBtn = new JButton("Selecionar");
         selecionarBtn.addActionListener(e -> selecionar());

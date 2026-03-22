@@ -42,8 +42,7 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return rua + " - " + cidade;
-    }
+        return rua + " - " + cidade;}
 
 //    public Cliente getCliente() {
 //        return cliente;}

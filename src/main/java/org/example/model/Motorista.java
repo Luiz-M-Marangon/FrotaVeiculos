@@ -37,12 +37,16 @@ public class Motorista {
         return cnh;}
     public void setCnh(String cnh) {
         this.cnh = cnh;}
-    public Endereco getEndereço() {
+    public Endereco getEndereco() {
         return endereco;}
-    public void setEndereço(Endereco endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;}
     public List<Viagem> getViagens() {
         return viagens;}
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;}
+
+    @Override
+    public String toString() {
+        return nome;}
 }

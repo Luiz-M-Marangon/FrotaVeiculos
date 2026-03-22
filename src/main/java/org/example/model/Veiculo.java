@@ -14,7 +14,7 @@ public class Veiculo {
 
     private String placa;
     private String cor;
-    private String renavan;
+    private String renavam;
 
     @OneToMany(mappedBy = "veiculo")
     private List<Viagem> viagens;
@@ -24,7 +24,7 @@ public class Veiculo {
     public Veiculo(String placa, String cor, String renavan){
         this.placa = placa;
         this.cor = cor;
-        this.renavan = renavan;
+        this.renavam = renavan;
     }
 
     public int getId() {
@@ -39,12 +39,16 @@ public class Veiculo {
         return cor;}
     public void setCor(String cor) {
         this.cor = cor;}
-    public String getRenavan() {
-        return renavan;}
-    public void setRenavan(String renavan) {
-        this.renavan = renavan;}
+    public String getRenavam() {
+        return renavam;}
+    public void setRenavam(String renavan) {
+        this.renavam = renavan;}
     public List<Viagem> getViagens() {
         return viagens;}
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;}
+
+    @Override
+    public String toString() {
+        return placa;}
 }

@@ -49,6 +49,13 @@ public class EnderecoPanel extends JPanel {
 
         tabela = new JTable(model);
 
+        tabela.setRowSelectionAllowed(true);
+        tabela.setColumnSelectionAllowed(false);
+        tabela.setCellSelectionEnabled(false);
+        tabela.setRowSelectionAllowed(true);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.setDefaultEditor(Object.class, null);
+
         tabela.getSelectionModel().addListSelectionListener(e -> preencherCampos());
 
         add(new JScrollPane(tabela), BorderLayout.CENTER);
