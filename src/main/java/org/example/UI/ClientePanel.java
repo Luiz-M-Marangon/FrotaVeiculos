@@ -211,6 +211,8 @@ public class ClientePanel extends JPanel {
         }
     }
 
+
+    //investigar o pq q nao deleta a tabela selecionada
     private void deletar() {
         int linha = tabela.getSelectedRow();
 
