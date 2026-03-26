@@ -9,7 +9,7 @@ import java.util.List;
 public class EnderecoDAO {
 
     public void salvar(Endereco endereco){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         em.getTransaction().begin();
 
@@ -20,7 +20,7 @@ public class EnderecoDAO {
     }
 
     public Endereco consultar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         Endereco e = em.find(Endereco.class, id);
 
@@ -37,7 +37,7 @@ public class EnderecoDAO {
     }
 
     public void atualizar(Endereco endereco){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         em.merge(endereco);
@@ -47,7 +47,7 @@ public class EnderecoDAO {
     }
 
     public void deletar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         Endereco e = em.find(Endereco.class, id);

@@ -9,7 +9,7 @@ import java.util.List;
 public class MotoristaDAO {
 
     public void salvar(Motorista motorista){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         em.getTransaction().begin();
 
@@ -20,7 +20,7 @@ public class MotoristaDAO {
     }
 
     public Motorista consultar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         Motorista m = em.find(Motorista.class, id);
 
@@ -37,7 +37,7 @@ public class MotoristaDAO {
     }
 
     public void atualizar(Motorista motorista){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         em.merge(motorista);
@@ -47,7 +47,7 @@ public class MotoristaDAO {
     }
 
     public void deletar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         Motorista m = em.find(Motorista.class, id);

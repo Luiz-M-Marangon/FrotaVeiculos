@@ -24,8 +24,8 @@ public class SelecionarVeiculo extends JDialog {
         carregarTabela();
 
         tabela.setRowSelectionAllowed(true);
-        tabela.setColumnSelectionAllowed(false);
-        tabela.setCellSelectionEnabled(false);
+        tabela.setColumnSelectionAllowed(false);    //  Não permite que seja editado diretamente nas tabelas
+        tabela.setCellSelectionEnabled(false);      //  Não permite que seja editado diretamente nas tabelas
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabela.setDefaultEditor(Object.class, null);
 
