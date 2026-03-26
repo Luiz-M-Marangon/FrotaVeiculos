@@ -6,20 +6,19 @@ import org.example.model.Veiculo;
 @Entity
 public class Carro extends Veiculo {
 
-    private int quantidadePortas;
+    private int cavalos;
 
     public Carro(){}
 
-    public Carro(String placa, String cor, String renavan, int quantidadePortas){
+    public Carro(String placa, String cor, String renavan, int cavalos){
         super(placa, cor, renavan);
-        this.quantidadePortas = quantidadePortas;
+        this.cavalos = cavalos;
     }
 
-    public int getQuantidadePortas() {
-        return quantidadePortas;
-    }
+    public int getCavalos() {
+        return cavalos;}
 
-    public void setQuantidadePortas(int quantidadePortas) {
-        this.quantidadePortas = quantidadePortas;
-    }
+    public void setCavalos(int cavalos) {
+        this.cavalos = cavalos;}
+
 }
