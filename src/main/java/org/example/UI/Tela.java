@@ -16,7 +16,7 @@ public class Tela {
         abas.add("Relatório", new RelatorioPanel());
 
         frame.add(abas);
-        frame.setSize(800, 600);
+        frame.setSize(1024, 768);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

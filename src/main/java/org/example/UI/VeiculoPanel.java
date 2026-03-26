@@ -101,6 +101,7 @@ public class VeiculoPanel extends JPanel {
         veiculoDAO.salvar(v);
         atualizarTabela();
         limparCampos();
+        JOptionPane.showMessageDialog(this, "Veiculo salvo com sucesso!");
     }
 
     private void atualizar() {
@@ -118,6 +119,7 @@ public class VeiculoPanel extends JPanel {
             veiculoDAO.atualizar(v);
             atualizarTabela();
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Veiculo atualizado com sucesso!");
         }
     }
 
@@ -130,6 +132,7 @@ public class VeiculoPanel extends JPanel {
             veiculoDAO.deletar(id);
             atualizarTabela();
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Veiculo deletado com sucesso!");
         }
     }
 

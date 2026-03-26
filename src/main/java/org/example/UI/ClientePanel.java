@@ -22,58 +22,9 @@ public class ClientePanel extends JPanel {
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public ClientePanel() {
-
-//        setLayout(new BorderLayout());
-//
-//        // FORM
-//        JPanel form = new JPanel(new GridLayout(3, 2));
-//
-//        form.add(new JLabel("Nome:"));
-//        nomeField = new JTextField();
-//        form.add(nomeField);
-//
-//        form.add(new JLabel("Nome:"));
-//        telefoneField = new JTextField();
-//        form.add(telefoneField);
-//
-//        form.add(new JLabel("Endereço:"));
-//
-//        JPanel enderecoPanel = new JPanel(new BorderLayout());
-//        enderecoLabel = new JLabel("Nenhum selecionado");
-//
-//        JButton selecionarBtn = new JButton("Selecionar");
-//        selecionarBtn.addActionListener(e -> abrirSelecao());
-//
-//        enderecoPanel.add(enderecoLabel, BorderLayout.CENTER);
-//        enderecoPanel.add(selecionarBtn, BorderLayout.EAST);
-//
-//        form.add(enderecoPanel);
-//
-//        JButton salvarBtn = new JButton("Salvar");
-//        JButton atualizarBtn = new JButton("Atualizar");
-//        JButton deletarBtn = new JButton("Deletar");
-//
-//        form.add(salvarBtn);
-//        form.add(atualizarBtn);
-//
-//        add(form, BorderLayout.NORTH);
-//
-//        // TABELA
-//        tabela = new JTable();
-//        atualizarTabela();
-//        add(new JScrollPane(tabela), BorderLayout.CENTER);
-//
-//        JPanel south = new JPanel();
-//        south.add(deletarBtn);
-//        add(south, BorderLayout.SOUTH);
-//
-//        // AÇÕES
-//        salvarBtn.addActionListener(e -> salvar());
-//        atualizarBtn.addActionListener(e -> atualizar());
-//        deletarBtn.addActionListener(e -> deletar());
         setLayout(new BorderLayout());
 
-        // ================= FORM =================
+        // formulario
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
@@ -89,19 +40,17 @@ public class ClientePanel extends JPanel {
         add(form, BorderLayout.NORTH);
 
         // ================= TABELA =================
-        model = new DefaultTableModel(
-                new Object[]{"ID", "Nome", "Telefone", "Endereço"}, 0
-        );
+        model = new DefaultTableModel(new Object[]{"ID", "Nome", "Telefone", "Endereço"}, 0);
 
         tabela = new JTable(model);
 
         //nao permitir edição na tebela principal do crud
         tabela.setRowSelectionAllowed(true);
-        tabela.setColumnSelectionAllowed(false);
-        tabela.setCellSelectionEnabled(false);
+        tabela.setColumnSelectionAllowed(false); // trava selecao de coluna
+        tabela.setCellSelectionEnabled(false); // trava a edicao de celula
         tabela.setRowSelectionAllowed(true);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabela.setDefaultEditor(Object.class, null); // 🔥 trava edição
+        tabela.setDefaultEditor(Object.class, null); //
 
         tabela.getSelectionModel().addListSelectionListener(e -> preencherCampos());
 
@@ -166,10 +115,7 @@ public class ClientePanel extends JPanel {
         enderecoSelecionado = dialog.getEnderecoSelecionado();
 
         if (enderecoSelecionado != null) {
-            enderecoLabel.setText(
-                    enderecoSelecionado.getRua() + " - " +
-                            enderecoSelecionado.getCidade()
-            );
+            enderecoLabel.setText(enderecoSelecionado.getRua() + " - " + enderecoSelecionado.getCidade());
         }
     }
 
@@ -186,18 +132,18 @@ public class ClientePanel extends JPanel {
 
         clienteDAO.salvar(c);
         atualizarTabela();
+        limparCampos();
+        JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso!");
     }
 
     private void atualizar() {
         int linha = tabela.getSelectedRow();
 
         if (linha >= 0) {
-
             if (enderecoSelecionado == null) {
                 JOptionPane.showMessageDialog(this, "Selecione um endereço!");
                 return;
             }
-
 
             int id = (int) tabela.getValueAt(linha, 0);
 
@@ -208,6 +154,8 @@ public class ClientePanel extends JPanel {
 
             clienteDAO.atualizar(c);
             atualizarTabela();
+            limparCampos();
+            JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso!");
         }
     }
 
@@ -219,33 +167,31 @@ public class ClientePanel extends JPanel {
         if (linha < 0) {
             JOptionPane.showMessageDialog(this, "Selecione uma linha!");
             return;
-        }else {
-            int id = (int) tabela.getValueAt(linha, 0);
+        }
+
+        int id = (int) tabela.getValueAt(linha, 0);
+        try {
             clienteDAO.deletar(id);
             atualizarTabela();
+            JOptionPane.showMessageDialog(this, "Cliente deletado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não é possível excluir o cliente.\n" + "Existem viagens vinculadas a ele.");
         }
-//        if (linha > 0) {
-//            int id = (int) tabela.getValueAt(linha, 0);
-//            clienteDAO.deletar(id);
-//            atualizarTabela();
-//        }
     }
 
     private void atualizarTabela() {
         List<Cliente> lista = clienteDAO.listar();
 
-        String[] col = {"ID", "Nome", "Telefone", "Endereço"};
-        Object[][] dados = new Object[lista.size()][4];
+        model.setRowCount(0); // limpa a tabela
 
-        for (int i = 0; i < lista.size(); i++) {
-            Cliente c = lista.get(i);
-            dados[i][0] = c.getId();
-            dados[i][1] = c.getNome();
-            dados[i][2] = c.getTelefone();
-            dados[i][3] = c.getEndereco();
+        for (Cliente c : lista) {
+            model.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getTelefone(),
+                c.getEndereco()
+            });
         }
-
-        tabela.setModel(new DefaultTableModel(dados, col));
     }
 
     private void preencherCampos() {
@@ -255,5 +201,12 @@ public class ClientePanel extends JPanel {
             nomeField.setText(tabela.getValueAt(linha, 1).toString());
             telefoneField.setText(tabela.getValueAt(linha, 2).toString());
         }
+    }
+
+    private void limparCampos() {
+        nomeField.setText("");
+        nomeField.setText("");
+        enderecoLabel.setText("Nenhum selecionado");
+        enderecoSelecionado = null;
     }
 }

@@ -106,6 +106,7 @@ public class EnderecoPanel extends JPanel {
         enderecoDAO.salvar(e);
         atualizarTabela();
         limparCampos();
+        JOptionPane.showMessageDialog(this, "Endereço salvo com sucesso!");
     }
 
     private void atualizar() {
@@ -124,18 +125,26 @@ public class EnderecoPanel extends JPanel {
             enderecoDAO.atualizar(e);
             atualizarTabela();
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Endereço atualizado com sucesso!");
         }
     }
 
     private void deletar() {
         int linha = tabela.getSelectedRow();
 
-        if (linha >= 0) {
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            return;
+        }
+
             int id = (int) tabela.getValueAt(linha, 0);
 
+        try {
             enderecoDAO.deletar(id);
             atualizarTabela();
             limparCampos();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Endereço deletado com sucesso!");
         }
     }
 

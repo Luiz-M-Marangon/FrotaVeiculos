@@ -36,6 +36,7 @@ public class ViagemPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
+        // formulario
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
@@ -150,7 +151,6 @@ public class ViagemPanel extends JPanel {
         Frame frame = (Frame) SwingUtilities.getWindowAncestor(this);
 
         switch (tipo) {
-
             case "cliente":
                 SelecionarCliente c = new SelecionarCliente(frame);
                 c.setVisible(true);
@@ -158,7 +158,6 @@ public class ViagemPanel extends JPanel {
                 if (clienteSelecionado != null)
                     clienteLabel.setText(clienteSelecionado.getNome());
                 break;
-
             case "motorista":
                 SelecionarMotorista m = new SelecionarMotorista(frame);
                 m.setVisible(true);
@@ -166,7 +165,6 @@ public class ViagemPanel extends JPanel {
                 if (motoristaSelecionado != null)
                     motoristaLabel.setText(motoristaSelecionado.getNome());
                 break;
-
             case "veiculo":
                 SelecionarVeiculo v = new SelecionarVeiculo(frame);
                 v.setVisible(true);
@@ -180,7 +178,6 @@ public class ViagemPanel extends JPanel {
     // ================= CRUD =================
 
     private void salvar() {
-
         if (clienteSelecionado == null || motoristaSelecionado == null ||
                 veiculoSelecionado == null || origemSelecionada == null || destinoSelecionado == null) {
 
@@ -200,6 +197,7 @@ public class ViagemPanel extends JPanel {
 
         atualizarTabela();
         limpar();
+        JOptionPane.showMessageDialog(this, "Viagem salva com sucesso!");
     }
 
     private void atualizar() {
@@ -214,49 +212,45 @@ public class ViagemPanel extends JPanel {
             Viagem v = viagemDAO.consultar(id);
 
             switch (coluna) {
-
                 case 1: // Origem
                     SelecionarEndereco o = new SelecionarEndereco(frame);
                     o.setVisible(true);
                     if (o.getEnderecoSelecionado() != null)
                         v.setOrigem(o.getEnderecoSelecionado());
                     break;
-
                 case 2: // Destino
                     SelecionarEndereco d = new SelecionarEndereco(frame);
                     d.setVisible(true);
                     if (d.getEnderecoSelecionado() != null)
                         v.setDestino(d.getEnderecoSelecionado());
                     break;
-
                 case 3: // Cliente
                     SelecionarCliente c = new SelecionarCliente(frame);
                     c.setVisible(true);
                     if (c.getSelecionado() != null)
                         v.setCliente(c.getSelecionado());
                     break;
-
                 case 4: // Motorista
                     SelecionarMotorista m = new SelecionarMotorista(frame);
                     m.setVisible(true);
                     if (m.getSelecionado() != null)
                         v.setMotorista(m.getSelecionado());
                     break;
-
                 case 5: // Veículo
                     SelecionarVeiculo ve = new SelecionarVeiculo(frame);
                     ve.setVisible(true);
                     if (ve.getSelecionado() != null)
                         v.setVeiculo(ve.getSelecionado());
                     break;
-
                 default:
-                    JOptionPane.showMessageDialog(this, "Selecione uma coluna válida!");
+                    JOptionPane.showMessageDialog(this, "Selecione uma coluna valida!");
                     return;
             }
 
             viagemDAO.atualizar(v);
             atualizarTabela();
+            limpar();
+            JOptionPane.showMessageDialog(this, "Viagem atualizada com sucesso!");
         }
     }
 
@@ -270,6 +264,7 @@ public class ViagemPanel extends JPanel {
 
             atualizarTabela();
             limpar();
+            JOptionPane.showMessageDialog(this, "Viagem deletada com sucesso!");
         }
     }
 

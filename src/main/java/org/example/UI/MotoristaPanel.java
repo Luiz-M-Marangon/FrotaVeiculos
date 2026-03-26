@@ -28,7 +28,7 @@ public class MotoristaPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        // ================= FORM =================
+        // formulario
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
@@ -58,7 +58,7 @@ public class MotoristaPanel extends JPanel {
         tabela.setCellSelectionEnabled(false);
         tabela.setRowSelectionAllowed(true);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabela.setDefaultEditor(Object.class, null); // 🔥 trava edição
+        tabela.setDefaultEditor(Object.class, null);
 
         tabela.getSelectionModel().addListSelectionListener(e -> preencherCampos());
 
@@ -119,18 +119,13 @@ public class MotoristaPanel extends JPanel {
     // ================= AÇÕES =================
 
     private void abrirSelecao() {
-        SelecionarEndereco dialog =
-                new SelecionarEndereco((Frame) SwingUtilities.getWindowAncestor(this));
+        SelecionarEndereco dialog = new SelecionarEndereco((Frame) SwingUtilities.getWindowAncestor(this));
 
         dialog.setVisible(true);
 
         enderecoSelecionado = dialog.getEnderecoSelecionado();
 
-        if (enderecoSelecionado != null) {
-            enderecoLabel.setText(
-                    enderecoSelecionado.getRua() + " - " +
-                            enderecoSelecionado.getCidade()
-            );
+        if (enderecoSelecionado != null) {enderecoLabel.setText(enderecoSelecionado.getRua() + " - " + enderecoSelecionado.getCidade());
         }
     }
 
@@ -150,6 +145,7 @@ public class MotoristaPanel extends JPanel {
         motoristaDAO.salvar(m);
         atualizarTabela();
         limparCampos();
+        JOptionPane.showMessageDialog(this, "Motorista salvo com sucesso!");
     }
 
     private void atualizar() {
@@ -174,22 +170,26 @@ public class MotoristaPanel extends JPanel {
             motoristaDAO.atualizar(m);
             atualizarTabela();
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Motorista atualizado com sucesso!");
         }
     }
 
     private void deletar() {
         int linha = tabela.getSelectedRow();
 
-        if (linha >= 0) {
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            return;
+        }
             int id = (int) tabela.getValueAt(linha, 0);
-
+        try {
             motoristaDAO.deletar(id);
             atualizarTabela();
             limparCampos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não é possível excluir o motorista.\n" + "Existem viagens vinculadas a ele.");
         }
     }
-
-    // ================= TABELA =================
 
     private void atualizarTabela() {
         List<Motorista> lista = motoristaDAO.listar();
