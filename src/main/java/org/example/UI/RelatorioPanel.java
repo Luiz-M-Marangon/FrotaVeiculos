@@ -24,7 +24,6 @@ public class RelatorioPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        // ================= TOPO =================
         JPanel top = new JPanel(new BorderLayout(5,5));
         top.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
@@ -46,7 +45,6 @@ public class RelatorioPanel extends JPanel {
 
         add(top, BorderLayout.NORTH);
 
-        // ================= TABELA =================
         model = new DefaultTableModel(
                 new Object[]{"ID", "Origem", "Destino", "Cliente", "Veículo"}, 0
         );
@@ -62,7 +60,6 @@ public class RelatorioPanel extends JPanel {
         add(new JScrollPane(tabela), BorderLayout.CENTER);
     }
 
-    // ================= SELEÇÃO =================
     private void abrirSelecao() {
         Frame frame = (Frame) SwingUtilities.getWindowAncestor(this);
 
@@ -76,7 +73,7 @@ public class RelatorioPanel extends JPanel {
         }
     }
 
-    // ================= BUSCA =================
+
     private void buscar() {
 
         if (motoristaSelecionado == null) {
@@ -86,10 +83,8 @@ public class RelatorioPanel extends JPanel {
 
         List<Viagem> lista = viagemDAO.listarPorMotorista(motoristaSelecionado.getId());
 
-        // limpa tabela
         model.setRowCount(0);
 
-        // preenche
         for (Viagem v : lista) {
             model.addRow(new Object[]{
                     v.getId(),

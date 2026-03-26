@@ -39,7 +39,7 @@ public class ClientePanel extends JPanel {
 
         add(form, BorderLayout.NORTH);
 
-        // ================= TABELA =================
+        // cria a tabela
         model = new DefaultTableModel(new Object[]{"ID", "Nome", "Telefone", "Endereço"}, 0);
 
         tabela = new JTable(model);
@@ -59,7 +59,6 @@ public class ClientePanel extends JPanel {
         atualizarTabela();
     }
 
-    // ================= UI HELPERS =================
 
     private JPanel criarLinha(String label, JTextField field) {
         JPanel p = new JPanel(new BorderLayout(5, 5));
@@ -89,6 +88,7 @@ public class ClientePanel extends JPanel {
 
         return p;
     }
+
     private JPanel criarBotoes() {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -160,7 +160,6 @@ public class ClientePanel extends JPanel {
     }
 
 
-    //investigar o pq q nao deleta a tabela selecionada
     private void deletar() {
         int linha = tabela.getSelectedRow();
 
@@ -180,10 +179,11 @@ public class ClientePanel extends JPanel {
         }
     }
 
+    // cricao de uma nova tabela atualizada
     private void atualizarTabela() {
         List<Cliente> lista = clienteDAO.listar();
 
-        model.setRowCount(0); // limpa a tabela
+        model.setRowCount(0); // limpa a tabela existente
 
         for (Cliente c : lista) {
             model.addRow(new Object[]{
@@ -195,6 +195,8 @@ public class ClientePanel extends JPanel {
         }
     }
 
+
+    // deixa os campos atualizados de acordo com a linha selecionada na tabela
     private void preencherCampos() {
         int linha = tabela.getSelectedRow();
 
@@ -204,6 +206,7 @@ public class ClientePanel extends JPanel {
         }
     }
 
+    // limpa os campos apos qualquer atualização
     private void limparCampos() {
         nomeField.setText("");
         nomeField.setText("");

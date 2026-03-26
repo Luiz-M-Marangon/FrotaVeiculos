@@ -28,7 +28,6 @@ public class VeiculoPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        // ================= FORM =================
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
@@ -44,7 +43,6 @@ public class VeiculoPanel extends JPanel {
 
         add(form, BorderLayout.NORTH);
 
-        // ================= TABELA =================
         model = new DefaultTableModel(
                 new Object[]{"ID", "Placa", "Cor", "Renavam", "Tipo"}, 0
         ) {
@@ -73,7 +71,6 @@ public class VeiculoPanel extends JPanel {
         atualizarTabela();
     }
 
-    // ================= UI =================
 
     private JPanel criarLinha(String label, JTextField field) {
         JPanel p = new JPanel(new BorderLayout(5, 5));
@@ -130,7 +127,6 @@ public class VeiculoPanel extends JPanel {
         return p;
     }
 
-    // ================= CRUD =================
 
     private void salvar() {
         Veiculo v = new Veiculo();
@@ -190,7 +186,6 @@ public class VeiculoPanel extends JPanel {
         JOptionPane.showMessageDialog(this, "Veículo deletado com sucesso!");
     }
 
-    // ================= TABELA =================
 
     private void atualizarTabela() {
         List<Veiculo> lista = veiculoDAO.listar();

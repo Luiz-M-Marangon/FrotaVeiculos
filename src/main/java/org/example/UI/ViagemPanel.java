@@ -77,7 +77,6 @@ public class ViagemPanel extends JPanel {
         atualizarTabela();
     }
 
-    // ================= UI =================
 
     private JPanel criarLinhaEndereco(String label, JTextField field, boolean origem) {
         JPanel p = new JPanel(new BorderLayout(5, 5));
@@ -144,7 +143,6 @@ public class ViagemPanel extends JPanel {
         return p;
     }
 
-    // ================= DIALOGS =================
 
     private void abrirDialog(String tipo) {
 
@@ -175,7 +173,6 @@ public class ViagemPanel extends JPanel {
         }
     }
 
-    // ================= CRUD =================
 
     private void salvar() {
         if (clienteSelecionado == null || motoristaSelecionado == null ||
@@ -268,7 +265,6 @@ public class ViagemPanel extends JPanel {
         }
     }
 
-    // ================= TABELA =================
 
     private void atualizarTabela() {
         model.setRowCount(0);

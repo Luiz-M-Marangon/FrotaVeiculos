@@ -24,7 +24,6 @@ public class EnderecoPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        // ================= FORM =================
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 
@@ -42,7 +41,6 @@ public class EnderecoPanel extends JPanel {
 
         add(form, BorderLayout.NORTH);
 
-        // ================= TABELA =================
         model = new DefaultTableModel(
                 new Object[]{"ID", "Rua", "Cidade", "Estado", "CEP"}, 0
         );
@@ -63,7 +61,6 @@ public class EnderecoPanel extends JPanel {
         atualizarTabela();
     }
 
-    // ================= UI HELPERS =================
 
     private JPanel criarLinha(String label, JTextField field) {
         JPanel p = new JPanel(new BorderLayout(5, 5));
@@ -93,7 +90,6 @@ public class EnderecoPanel extends JPanel {
         return p;
     }
 
-    // ================= CRUD =================
 
     private void salvar() {
         Endereco e = new Endereco();
@@ -148,7 +144,6 @@ public class EnderecoPanel extends JPanel {
         }
     }
 
-    // ================= TABELA =================
 
     private void atualizarTabela() {
         List<Endereco> lista = enderecoDAO.listar();

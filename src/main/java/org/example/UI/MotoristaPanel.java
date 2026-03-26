@@ -46,7 +46,6 @@ public class MotoristaPanel extends JPanel {
 
         add(form, BorderLayout.NORTH);
 
-        // ================= TABELA =================
         model = new DefaultTableModel(
                 new Object[]{"ID", "Nome", "CPF", "CNH", "Endereço"}, 0
         );
@@ -67,7 +66,6 @@ public class MotoristaPanel extends JPanel {
         atualizarTabela();
     }
 
-    // ================= UI HELPERS =================
 
     private JPanel criarLinha(String label, JTextField field) {
         JPanel p = new JPanel(new BorderLayout(5, 5));
@@ -116,7 +114,6 @@ public class MotoristaPanel extends JPanel {
         return p;
     }
 
-    // ================= AÇÕES =================
 
     private void abrirSelecao() {
         SelecionarEndereco dialog = new SelecionarEndereco((Frame) SwingUtilities.getWindowAncestor(this));
