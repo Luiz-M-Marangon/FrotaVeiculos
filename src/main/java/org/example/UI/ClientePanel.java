@@ -173,6 +173,7 @@ public class ClientePanel extends JPanel {
         try {
             clienteDAO.deletar(id);
             atualizarTabela();
+            limparCampos();
             JOptionPane.showMessageDialog(this, "Cliente deletado com sucesso!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Não é possível excluir o cliente.\n" + "Existem viagens vinculadas a ele.");

@@ -186,6 +186,7 @@ public class MotoristaPanel extends JPanel {
             motoristaDAO.deletar(id);
             atualizarTabela();
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Motorista deletado com sucesso!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Não é possível excluir o motorista.\n" + "Existem viagens vinculadas a ele.");
         }

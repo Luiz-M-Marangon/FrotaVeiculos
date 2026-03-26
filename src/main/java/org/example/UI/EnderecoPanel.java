@@ -144,7 +144,7 @@ public class EnderecoPanel extends JPanel {
             atualizarTabela();
             limparCampos();
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Endereço deletado com sucesso!");
+            JOptionPane.showMessageDialog(this, "Não é possível excluir o cliente.\n" + "Existem viagens vinculadas a ele");
         }
     }
 

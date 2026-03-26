@@ -15,6 +15,8 @@ public class Veiculo {
     private String placa;
     private String cor;
     private String renavam;
+    private String tipo;
+    private Integer valorExtra;
 
     @OneToMany(mappedBy = "veiculo")
     private List<Viagem> viagens;
@@ -47,6 +49,14 @@ public class Veiculo {
         return viagens;}
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;}
+    public String getTipo() {
+        return tipo;}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;}
+    public Integer getValorExtra() {
+        return valorExtra;}
+    public void setValorExtra(Integer valorExtra) {
+        this.valorExtra = valorExtra;}
 
     @Override
     public String toString() {
