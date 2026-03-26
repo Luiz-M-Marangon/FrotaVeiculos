@@ -10,7 +10,7 @@ import java.util.List;
 public class ViagemDAO {
 
     public void salvar(Viagem viagem){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         em.getTransaction().begin();
 
@@ -21,7 +21,7 @@ public class ViagemDAO {
     }
 
     public Viagem consultar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         Viagem v = em.find(Viagem.class, id);
 
@@ -30,7 +30,7 @@ public class ViagemDAO {
     }
 
     public List<Viagem> listar(){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         List<Viagem> lista = em.createQuery("FROM Viagem", Viagem.class).getResultList();
 
         em.close();
@@ -38,7 +38,7 @@ public class ViagemDAO {
     }
 
     public void atualizar(Viagem viagem){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         em.merge(viagem);
@@ -48,7 +48,7 @@ public class ViagemDAO {
     }
 
     public void deletar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         Viagem v = em.find(Viagem.class, id);
@@ -63,7 +63,7 @@ public class ViagemDAO {
 
     // UTILIZADO NO RELATÓRIO DE VIAGENS POR MOTORISTA
     public List<Viagem> listarPorMotorista(int motoristaId){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         String jpql = "SELECT v FROM Viagem v WHERE v.motorista.id = :id";
 

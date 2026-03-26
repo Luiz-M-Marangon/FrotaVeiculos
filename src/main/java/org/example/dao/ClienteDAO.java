@@ -9,7 +9,7 @@ import java.util.List;
 public class ClienteDAO {
 
     public void salvar(Cliente cliente){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         em.getTransaction().begin();
 
@@ -20,7 +20,7 @@ public class ClienteDAO {
     }
 
     public Cliente consultar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
 
         Cliente c = em.find(Cliente.class, id);
 
@@ -29,7 +29,7 @@ public class ClienteDAO {
     }
 
     public List<Cliente> listar(){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         List<Cliente> lista = em.createQuery("FROM Cliente", Cliente.class).getResultList();
 
         em.close();
@@ -37,7 +37,7 @@ public class ClienteDAO {
     }
 
     public void atualizar(Cliente cliente){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         em.merge(cliente);
@@ -47,7 +47,7 @@ public class ClienteDAO {
     }
 
     public void deletar(int id){
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();      // código reaproveitado de util.JPAUTIL
         em.getTransaction().begin();
 
         Cliente c = em.find(Cliente.class, id);
